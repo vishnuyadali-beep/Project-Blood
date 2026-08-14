@@ -1,11 +1,16 @@
-extends Node
+extends CharacterBody2D
 
+var speed = 100
+var health = 10
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	pass
 
+func _physics_process(delta):
+	pass
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func take_damage(amount):
+	pass
+
+func die():
 	pass
