@@ -1,11 +1,19 @@
 [gd_scene format=3 uid="uid://cjg2fn5ki0evf"]
 
+[ext_resource type="Texture2D" uid="uid://ddyveqmby2720" path="res://assets/sprites/Background.png" id="1_7k8c1"]
 [ext_resource type="PackedScene" uid="uid://dgo5i1be0djp8" path="res://scenes/player/player.tscn" id="1_tsias"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6bx2n"]
 size = Vector2(101, 179)
 
 [node name="World" type="Node2D" unique_id=1986188915]
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=202035506]
+offset_left = -445.0
+offset_top = -450.0
+offset_right = 579.0
+offset_bottom = 574.0
+texture = ExtResource("1_7k8c1")
 
 [node name="Player" parent="." unique_id=52667878 instance=ExtResource("1_tsias")]
 
