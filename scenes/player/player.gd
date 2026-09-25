@@ -25,11 +25,13 @@ func _start_dash(direction):
 	dash_direction = direction
 	is_dashing = true
 	can_dash = false
+	$Sprite2D.play("dash")
 	$DashTimer.start()
 	$DashCooldownTimer.start()
 
 func _on_dash_cooldown_timer_timeout():
 	can_dash = true
+	$Sprite2D.play("idle")
 
 
 func _on_dash_timer_timeout():
