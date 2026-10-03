@@ -1,38 +1,52 @@
 extends CharacterBody2D
-var speed = 300
-var dash_speed = 800
-var dash_duration = 0.15
-var dash_cooldown = 0.5
-var is_dashing = false
-var can_dash = true
-var dash_direction = Vector2.ZERO
+signal hit
 
+var speed = 400 # How fast the player will move (pixels/sec).
+var screen_size # Size of the game window.
+var dash_time = 0.25
+var dash_speed = 800
+var dash_direction
+var dash_countdown
+var dash_cooldown = 1
+var cooldown = 0
+var is_dashing = false
 func _ready():
 	$Sprite2D.play("idle")
-
-func _physics_process(delta):
-	var direction = Input.get_vector("move_left", "move_right", "move_up","move_down")
 	
+
+func _process(delta):
+	var velocity = Vector2.ZERO # The player's movement vector.
+	if Input.is_action_pressed("move_right"):
+		velocity.x += 1
+	if Input.is_action_pressed("move_left"):
+		velocity.x -= 1
+	if Input.is_action_pressed("move_down"):
+		velocity.y += 1
+	if Input.is_action_pressed("move_up"):
+		velocity.y -= 1
+	if Input.is_action_just_pressed("dash") and cooldown <= 0 and !is_dashing:
+		_start_dash(velocity)
 	if is_dashing:
-		velocity = dash_direction * dash_speed
+		position += dash_direction * dash_speed * delta
+		$Sprite2D.animation = "dash"
+		dash_countdown -= delta
+		if dash_countdown <= 0:
+			cooldown = dash_cooldown
+			is_dashing = false
 	else:
-		velocity = direction * speed
-		if Input.is_action_just_pressed("dash") and can_dash and direction != Vector2.ZERO:
-			_start_dash(direction)
-	move_and_slide()
-
-func _start_dash(direction):
-	dash_direction = direction
+		if velocity.length() > 0:
+			velocity = velocity.normalized() * speed
+		position += velocity * delta
+		if velocity.x != 0:
+			$Sprite2D.animation = "walk"
+			$Sprite2D.flip_v = false
+			$Sprite2D.flip_h = velocity.x < 0
+		else:
+			$Sprite2D.animation = "idle"
+	if cooldown > 0:
+		cooldown -= delta
+func _start_dash(velocity):
 	is_dashing = true
-	can_dash = false
-	$Sprite2D.play("dash")
-	$DashTimer.start()
-	$DashCooldownTimer.start()
-
-func _on_dash_cooldown_timer_timeout():
-	can_dash = true
-	$Sprite2D.play("idle")
-
-
-func _on_dash_timer_timeout():
-	is_dashing = false
+	dash_countdown = dash_time
+	dash_direction = velocity.normalized()
+	
