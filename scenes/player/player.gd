@@ -7,7 +7,7 @@ var dash_time = 0.25
 var dash_speed = 800
 var dash_direction
 var dash_countdown
-var dash_cooldown = 1
+var dash_cooldown = 0.5
 var cooldown = 0
 var is_dashing = false
 func _ready():
@@ -38,6 +38,10 @@ func _process(delta):
 			velocity = velocity.normalized() * speed
 		position += velocity * delta
 		if velocity.x != 0:
+			$Sprite2D.animation = "walk"
+			$Sprite2D.flip_v = false
+			$Sprite2D.flip_h = velocity.x < 0
+		elif velocity.y != 0:
 			$Sprite2D.animation = "walk"
 			$Sprite2D.flip_v = false
 			$Sprite2D.flip_h = velocity.x < 0
