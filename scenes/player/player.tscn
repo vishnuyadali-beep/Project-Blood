@@ -188,7 +188,7 @@ metadata/_edit_horizontal_guides_ = [32.0]
 texture_filter = 1
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_y0acb")
-animation = &"dash"
+animation = &"walk"
 
 [node name="Camera2D" type="Camera2D" parent="Sprite2D" unique_id=142299635]
 scale = Vector2(2, 2)
