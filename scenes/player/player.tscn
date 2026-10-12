@@ -180,7 +180,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6bx2n"]
 size = Vector2(6.3125, 9.3125)
 
-[node name="Player" type="CharacterBody2D" unique_id=52667878]
+[node name="Player" type="CharacterBody2D" unique_id=52667878 groups=["player"]]
 script = ExtResource("1_4flbx")
 metadata/_edit_horizontal_guides_ = [32.0]
 

@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://0tbsr0aggbgb"]
+
+[ext_resource type="Script" uid="uid://bu5xfopcck5m8" path="res://scenes/teleporter/teleporter.gd" id="1_lteo1"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6bx2n"]
+radius = 27.018513
+
+[node name="Teleporter" type="Area2D" unique_id=736824973]
+script = ExtResource("1_lteo1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=897462362]
+shape = SubResource("CircleShape2D_6bx2n")
+
+[node name="ExitPoint" type="Marker2D" parent="." unique_id=2080222513]
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
