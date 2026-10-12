@@ -1,7 +1,29 @@
 [gd_scene format=3 uid="uid://d3uvf7h5py2vk"]
 
 [ext_resource type="PackedScene" uid="uid://cjg2fn5ki0evf" path="res://scenes/levels/world.tscn" id="1_72ix8"]
+[ext_resource type="PackedScene" uid="uid://0tbsr0aggbgb" path="res://scenes/teleporter/Teleporter.tscn" id="2_2vj2h"]
 
 [node name="Main" type="Node2D" unique_id=1615745898]
 
 [node name="World" parent="." unique_id=1986188915 instance=ExtResource("1_72ix8")]
+
+[node name="Teleporter_Big" parent="." unique_id=736824973 node_paths=PackedStringArray("destination") instance=ExtResource("2_2vj2h")]
+position = Vector2(1919.905, 1916.875)
+destination = NodePath("../Teleporter_Small")
+
+[node name="CollisionShape2D" parent="Teleporter_Big" index="0" unique_id=897462362]
+scale = Vector2(3.28, 3.28)
+
+[node name="ExitPoint" parent="Teleporter_Big" index="1" unique_id=2080222513]
+position = Vector2(-160.915, -65.88)
+scale = Vector2(1.0404543, 1.1013935)
+
+[node name="Teleporter_Small" parent="." unique_id=1403910627 node_paths=PackedStringArray("destination") instance=ExtResource("2_2vj2h")]
+position = Vector2(1679.995, 2262.555)
+destination = NodePath("../Teleporter_Big")
+
+[node name="ExitPoint" parent="Teleporter_Small" index="1" unique_id=2080222513]
+position = Vector2(53.02, 1.745)
+
+[editable path="Teleporter_Big"]
+[editable path="Teleporter_Small"]
